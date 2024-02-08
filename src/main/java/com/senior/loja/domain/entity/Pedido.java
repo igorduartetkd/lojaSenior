@@ -7,12 +7,14 @@ import lombok.experimental.SuperBuilder;
 import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 @SuperBuilder
 @Getter
 public class Pedido extends BaseDomain {
+    private final UUID id;
     private final Set<ItemDoPedido> itens;
-    private BigDecimal desconto;
+    private BigDecimal desconto = BigDecimal.ZERO;
     private Situacao situacao;
 
     public void aplicarDesconto(BigDecimal desconto) {
