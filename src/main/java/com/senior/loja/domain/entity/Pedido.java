@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Pedido extends BaseDomain {
     private final UUID id;
     private final Set<ItemDoPedido> itens;
-    private BigDecimal desconto = BigDecimal.ZERO;
+    private BigDecimal desconto;
     private Situacao situacao;
 
     public void aplicarDesconto(BigDecimal desconto) {
