@@ -8,13 +8,19 @@ import java.util.UUID;
 
 @Getter
 @SuperBuilder
-public abstract class Item extends BaseDomain {
+public class Item extends BaseDomain {
     private final UUID id;
     private final String nome;
     private final BigDecimal preco;
     private Boolean ativo;
+    private Tipo tipo;
 
-    abstract protected Boolean aceitaDesconto();
+    private Boolean aceitaDesconto() {
+        if (tipo.equals(Tipo.PRODUTO)) {
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
 
     public Boolean disponivelParaCompra() {
         return ativo;
@@ -54,5 +60,10 @@ public abstract class Item extends BaseDomain {
         }
 
         return this.id.equals(item.id);
+    }
+
+    public enum Tipo {
+        PRODUTO,
+        SERVICO
     }
 }
