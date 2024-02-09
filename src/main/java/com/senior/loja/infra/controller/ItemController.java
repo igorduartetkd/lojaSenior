@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("item")
+@RequestMapping("itens")
 public class ItemController {
 
     ItemService itemService;

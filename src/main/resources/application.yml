@@ -6,4 +6,4 @@ spring:
     url: jdbc:postgresql://localhost:5432/loja
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
