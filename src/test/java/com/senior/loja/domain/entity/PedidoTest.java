@@ -1,5 +1,6 @@
 package com.senior.loja.domain.entity;
 
+import com.senior.loja.business.exception.ItemInativoException;
 import com.senior.loja.business.exception.PedidoFechadoException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -87,13 +88,12 @@ class PedidoTest {
     void adicionarItem_itemNaoDisponivel() {
         // given
         when(itemMock.disponivelParaCompra()).thenReturn(false);
+        UUID id = UUID.randomUUID();
+        when(itemMock.getId()).thenReturn(id);
 
-        // when
-        pedido.adicionarItem(itemMock);
-
-        // then
-        assertTrue(pedido.getItens().isEmpty());
-
+        // when e then
+        ItemInativoException exception = assertThrows(ItemInativoException.class, () -> pedido.adicionarItem(itemMock));
+        assertEquals(String.format("O item de id %s está desativado", id), exception.getMessage());
     }
 
     @Test
