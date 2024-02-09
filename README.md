@@ -3,6 +3,12 @@
 Bem-vindo à documentação da API de gerenciamento de pedidos e itens. Esta API permite realizar operações CRUD (Criar/Ler/Atualizar/Excluir) para itens (do tipo PRODUTO ou SERVICO) 
 E manipular pedidos podendo adicionar, remover e visualizar os itens do pedido. 
 
+Versões:
+- Java 17
+- Spring boot 3.2.2
+- Postgres 16 (mas não deve dar problema com outras versões)
+  - configurar usuario, senha e nome da database que criar no arquivo  src/main/resources/application.yml 
+
 ## Endpoints
 ### Pedidos
 #### Listar Pedidos [GET /pedidos]
