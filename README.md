@@ -9,11 +9,13 @@ Versões:
 - Postgres 16 (mas não deve dar problema com outras versões)
   - Abrir o arquivo src/main/resources/application.yml
   - Adicionar seu usuario e senha do postgres
-  - Adicionar uma database existente ou criar uma chamada loja
+  - Adicionar uma database existente ou criar uma chamada ```loja```
 
 Executar o projeto:
 - Após ter o ambiente configurado, na pasta raiz executar o comando:
-  - ```mvn spring-boot:run```
+```
+ mvn spring-boot:run
+```
 
 ## Endpoints
 ### Pedidos
@@ -83,7 +85,7 @@ Executar o projeto:
 ####  Detalhes do Item [GET /itens/{id}]
 - Retorna os detalhes de um item específico.
 
-##Observações Importantes
+## Observações Importantes
 - Todos os IDs das entidades são gerados automaticamente e são do tipo UUID.
 - É possível aplicar filtros na listagem de pedidos e itens.
 - As entidades utilizam Bean Validation para garantir a integridade dos dados.
