@@ -4,6 +4,6 @@ import java.util.UUID;
 
 public class ItemNotFoundException extends RuntimeException {
     public ItemNotFoundException(UUID id) {
-        super(String.format("Item não encontrado com id %s", id.toString()));
+        super(String.format("Item não encontrado com o id %s", id.toString()));
     }
 }
