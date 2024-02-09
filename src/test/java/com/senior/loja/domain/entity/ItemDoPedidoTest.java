@@ -44,7 +44,7 @@ class ItemDoPedidoTest {
     @Test
     void possuiMaisDeUmaUnidade() {
         // when
-        Boolean possuiMaisDeUmaUnidade = itemDoPedido.possuiMaisDeUmaUnidade();
+        Boolean possuiMaisDeUmaUnidade = itemDoPedido.qtdChegouAZero();
 
         //then
         assertTrue(possuiMaisDeUmaUnidade);
@@ -56,7 +56,7 @@ class ItemDoPedidoTest {
         ItemDoPedido item = ItemDoPedido.builder().qtd(1).build();
 
         // when
-        Boolean possuiMaisDeUmaUnidade = item.possuiMaisDeUmaUnidade();
+        Boolean possuiMaisDeUmaUnidade = item.qtdChegouAZero();
 
         //then
         assertFalse(possuiMaisDeUmaUnidade);

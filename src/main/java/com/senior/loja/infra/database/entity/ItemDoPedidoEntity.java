@@ -1,6 +1,8 @@
 package com.senior.loja.infra.database.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -8,15 +10,18 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "item_do_pedido")
 @SuperBuilder
 @NoArgsConstructor
+@Getter
 public class ItemDoPedidoEntity extends BaseEntity {
 
-    @OneToOne
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
     private ItemEntity itemEntity;
 
+    @NotNull
     @Column
     private Integer qtd;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pedido_id")
     private PedidoEntity pedido;
 }

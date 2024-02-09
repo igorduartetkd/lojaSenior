@@ -17,7 +17,6 @@ public class ItemDoPedidoDTOMapper implements DTOMapper<ItemDoPedido, ItemDoPedi
 
     public Optional<ItemDoPedido> toDomain(ItemDoPedidoDTO itemDoPedidoDTO) {
         return itemDoPedidoDTO == null ? Optional.empty() : Optional.of(ItemDoPedido.builder()
-                .id(itemDoPedidoDTO.getId())
                 .item(itemDTOMapper.toDomain(itemDoPedidoDTO.getItem()))
                 .qtd(itemDoPedidoDTO.getQtd())
                 .build());
@@ -25,7 +24,6 @@ public class ItemDoPedidoDTOMapper implements DTOMapper<ItemDoPedido, ItemDoPedi
 
     public ItemDoPedidoDTO toDTO(ItemDoPedido itemDoPedido) {
         return itemDoPedido == null ? null : ItemDoPedidoDTO.builder()
-                .id(itemDoPedido.getId())
                 .item(itemDTOMapper.toDTO(itemDoPedido.getItem()))
                 .qtd(itemDoPedido.getQtd())
                 .build();

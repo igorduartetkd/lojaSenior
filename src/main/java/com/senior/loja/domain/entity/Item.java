@@ -1,17 +1,17 @@
 package com.senior.loja.domain.entity;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Getter
+@Setter
 @SuperBuilder
 public class Item extends BaseDomain {
-    private final UUID id;
-    private final String nome;
-    private final BigDecimal preco;
+    private String nome;
+    private BigDecimal preco;
     private Boolean ativo;
     private Tipo tipo;
 
@@ -59,7 +59,7 @@ public class Item extends BaseDomain {
             return false;
         }
 
-        return this.id.equals(item.id);
+        return this.getId().equals(item.getId());
     }
 
     public enum Tipo {

@@ -2,6 +2,8 @@ package com.senior.loja.infra.database.entity;
 
 import com.senior.loja.domain.entity.Item;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -11,16 +13,21 @@ import java.math.BigDecimal;
 @Table(name = "item")
 @SuperBuilder
 @NoArgsConstructor
+@Getter
 public class ItemEntity extends BaseEntity {
-    @Column(length = 100)
+
+    @NotNull
+    @Column(nullable = false, length = 100)
     private String nome;
 
+    @NotNull
     @Column(precision = 10, scale = 2)
     private BigDecimal preco;
 
-    @Column(nullable = false, columnDefinition = "boolean default true")
+    @NotNull
     private Boolean ativo;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Item.Tipo tipo;
 }
