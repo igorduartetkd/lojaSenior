@@ -1,6 +1,6 @@
 # API de Gerenciamento de Pedidos e Itens
 
-Bem-vindo à documentação da API de gerenciamento de pedidos e itens. Esta API permite realizar operações CRUD (Criar/Ler/Atualizar/Excluir) para itens (do tipo PRODUTO ou SERVICO) 
+Documentação da API de gerenciamento de pedidos e itens. Esta API permite realizar operações CRUD (Criar/Ler/Atualizar/Excluir) para itens (do tipo PRODUTO ou SERVICO) 
 E manipular pedidos podendo adicionar, remover e visualizar os itens do pedido. 
 
 Versões:
