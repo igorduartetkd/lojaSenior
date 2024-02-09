@@ -20,12 +20,12 @@ public class ItemDoPedidoMapper implements EntityToDomainMapper<ItemDoPedidoEnti
 
 
     @Override
-    public Optional<ItemDoPedido> toDomain(ItemDoPedidoEntity entity) {
+    public Optional<ItemDoPedido> toDomainOptional(ItemDoPedidoEntity entity) {
         return entity == null ? Optional.empty() : Optional.of(ItemDoPedido.builder()
                 .id(entity.getId())
-                .item(itemMapper.toDomain(entity.getItemEntity()).orElse(null))
+                .item(itemMapper.toDomainOptional(entity.getItemEntity()).orElse(null))
                 .qtd(entity.getQtd())
-                .pedido(pedidoMapper.toDomain(entity.getPedido()).orElse(null))
+                .pedido(pedidoMapper.toDomainOptional(entity.getPedido()).orElse(null))
                 .build());
     }
 

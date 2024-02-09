@@ -29,19 +29,19 @@ public class ItemDoPedidoRepositoryImpl implements ItemDoPedidoRepository {
     public Optional<ItemDoPedido> save(ItemDoPedido domain) {
         ItemDoPedidoEntity itemDoPedidoEntity = itemDoPedidoMapper.toEntity(domain);
         itemDoPedidoEntity = itemDoPedidoEntityRepository.save(itemDoPedidoEntity);
-        return itemDoPedidoMapper.toDomain(itemDoPedidoEntity);
+        return itemDoPedidoMapper.toDomainOptional(itemDoPedidoEntity);
     }
 
     @Override
     public Optional<ItemDoPedido> findById(UUID id) {
         Optional<ItemDoPedidoEntity> itemDoPedidoEntity = itemDoPedidoEntityRepository.findById(id);
-        return itemDoPedidoMapper.toDomain(itemDoPedidoEntity);
+        return itemDoPedidoMapper.toDomainOptional(itemDoPedidoEntity);
     }
 
     @Override
     public Set<ItemDoPedido> findAll() {
         List<ItemDoPedidoEntity> itensDoPedidoEntity = itemDoPedidoEntityRepository.findAll();
-        return itemDoPedidoMapper.toDomain(itensDoPedidoEntity);
+        return itemDoPedidoMapper.toDomainOptional(itensDoPedidoEntity);
     }
 
     @Override
@@ -58,12 +58,12 @@ public class ItemDoPedidoRepositoryImpl implements ItemDoPedidoRepository {
     @Override
     public Set<ItemDoPedido> findAllByPedido(Pedido pedido) {
         List<ItemDoPedidoEntity> itensDoPedido = itemDoPedidoEntityRepository.findAllByPedidoId(pedido.getId());
-        return itemDoPedidoMapper.toDomain(itensDoPedido);
+        return itemDoPedidoMapper.toDomainOptional(itensDoPedido);
     }
 
     public Set<ItemDoPedido> saveAll(Set<ItemDoPedido> itens) {
         List<ItemDoPedidoEntity> itensSalvos = itemDoPedidoEntityRepository.saveAll(itemDoPedidoMapper.toEntity(itens));
-        return itemDoPedidoMapper.toDomain(itensSalvos);
+        return itemDoPedidoMapper.toDomainOptional(itensSalvos);
     }
 
 }

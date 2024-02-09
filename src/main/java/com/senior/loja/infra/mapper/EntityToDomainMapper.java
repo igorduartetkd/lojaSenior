@@ -10,15 +10,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public interface EntityToDomainMapper<E extends BaseEntity, D extends BaseDomain> {
-    default Optional<D> toDomain(Optional<E> entity) {
-        return entity.isEmpty() ? Optional.empty() : toDomain(entity.get());
+    default Optional<D> toDomainOptional(Optional<E> entity) {
+        return entity.isEmpty() ? Optional.empty() : toDomainOptional(entity.get());
     }
 
-    Optional<D> toDomain(E entity);
+    Optional<D> toDomainOptional(E entity);
 
-    default Set<D> toDomain(Collection<E> entities) {
+    default D toDomain(E entity) {
+        return toDomainOptional(entity).orElse(null);
+    }
+
+    default Set<D> toDomainOptional(Collection<E> entities) {
         return entities == null ? Collections.emptySet() : entities.stream()
-                .map(this::toDomain)
+                .map(this::toDomainOptional)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toSet());

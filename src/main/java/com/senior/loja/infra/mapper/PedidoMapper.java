@@ -11,7 +11,7 @@ public class PedidoMapper implements EntityToDomainMapper<PedidoEntity, Pedido>,
         DomainToEntityMapper<Pedido, PedidoEntity> {
 
     @Override
-    public Optional<Pedido> toDomain(PedidoEntity entity) {
+    public Optional<Pedido> toDomainOptional(PedidoEntity entity) {
         return entity == null ? Optional.empty() : Optional.of(Pedido.builder()
                 .id(entity.getId())
                 .desconto(entity.getDesconto())

@@ -11,7 +11,7 @@ public class ItemMapper implements EntityToDomainMapper<ItemEntity, Item>,
         DomainToEntityMapper<Item, ItemEntity> {
 
     @Override
-    public Optional<Item> toDomain(ItemEntity entity) {
+    public Optional<Item> toDomainOptional(ItemEntity entity) {
         return entity == null ? Optional.empty() : Optional.of(Item.builder()
                 .id(entity.getId())
                 .nome(entity.getNome())

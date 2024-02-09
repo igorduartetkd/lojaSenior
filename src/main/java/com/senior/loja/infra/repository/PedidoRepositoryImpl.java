@@ -28,18 +28,18 @@ public class PedidoRepositoryImpl implements PedidoRepository {
     public Optional<Pedido> save(Pedido domain) {
         PedidoEntity pedidoEntity = pedidoMapper.toEntity(domain);
         pedidoEntity = pedidoEntityRepository.save(pedidoEntity);
-        return pedidoMapper.toDomain(pedidoEntity);
+        return pedidoMapper.toDomainOptional(pedidoEntity);
     }
 
     @Override
     public Optional<Pedido> findById(UUID id) {
         Optional<PedidoEntity> pedidoEntity = pedidoEntityRepository.findById(id);
-        return pedidoMapper.toDomain(pedidoEntity);
+        return pedidoMapper.toDomainOptional(pedidoEntity);
     }
 
     public Set<Pedido> findAll() {
         List<PedidoEntity> pedidos = pedidoEntityRepository.findAll();
-        return pedidoMapper.toDomain(pedidos);
+        return pedidoMapper.toDomainOptional(pedidos);
     }
 
     @Override

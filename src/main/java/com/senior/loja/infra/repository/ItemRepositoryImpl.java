@@ -5,6 +5,8 @@ import com.senior.loja.domain.repository.ItemRepository;
 import com.senior.loja.infra.database.entity.ItemEntity;
 import com.senior.loja.infra.database.repository.ItemEntityRepository;
 import com.senior.loja.infra.mapper.ItemMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -27,19 +29,21 @@ public class ItemRepositoryImpl implements ItemRepository {
     public Optional<Item> save(Item item) {
         ItemEntity itemEntity = itemMapper.toEntity(item);
         itemEntity = itemEntityRepository.save(itemEntity);
-        return itemMapper.toDomain(itemEntity);
+        return itemMapper.toDomainOptional(itemEntity);
     }
 
     @Override
     public Optional<Item> findById(UUID id) {
         Optional<ItemEntity> itemEntity = itemEntityRepository.findById(id);
-        return itemMapper.toDomain(itemEntity);
+        return itemMapper.toDomainOptional(itemEntity);
     }
 
     @Override
     public Set<Item> findAll() {
         List<ItemEntity> itensEntity = itemEntityRepository.findAll();
         return itemMapper.toDomain(itensEntity);
+        return itemMapper.toDomainOptional(itensEntity);
+    }
     }
 
     @Override
