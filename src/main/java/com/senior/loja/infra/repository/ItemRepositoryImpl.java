@@ -41,9 +41,12 @@ public class ItemRepositoryImpl implements ItemRepository {
     @Override
     public Set<Item> findAll() {
         List<ItemEntity> itensEntity = itemEntityRepository.findAll();
-        return itemMapper.toDomain(itensEntity);
         return itemMapper.toDomainOptional(itensEntity);
     }
+
+    public Page<Item> findAll(Pageable pageable) {
+        Page<ItemEntity> itensEntity = itemEntityRepository.findAll(pageable);
+        return itensEntity.map(itemMapper::toDomain);
     }
 
     @Override

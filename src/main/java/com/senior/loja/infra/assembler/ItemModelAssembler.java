@@ -16,7 +16,7 @@ public class ItemModelAssembler implements RepresentationModelAssembler<ItemDTO,
     public EntityModel<ItemDTO> toModel(ItemDTO item) {
         return EntityModel.of(item,
                 linkTo(methodOn(ItemController.class).findItemById(item.getId())).withSelfRel(),
-                linkTo(methodOn(ItemController.class).findAll()).withRel("itens"));
+                linkTo(methodOn(ItemController.class).findAll(null)).withRel("itens"));
     }
 
     @Override

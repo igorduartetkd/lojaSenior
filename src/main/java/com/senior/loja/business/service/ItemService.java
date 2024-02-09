@@ -1,13 +1,15 @@
 package com.senior.loja.business.service;
 
+import com.senior.loja.business.dto.ItemDTO;
 import com.senior.loja.business.exception.ItemConflictException;
 import com.senior.loja.business.exception.ItemNotFoundException;
 import com.senior.loja.business.mapper.ItemDTOMapper;
-import com.senior.loja.business.dto.ItemDTO;
 import com.senior.loja.domain.entity.Item;
 import com.senior.loja.domain.repository.ItemDoPedidoRepository;
 import com.senior.loja.domain.repository.ItemRepository;
 import com.senior.loja.infra.repository.ItemDoPedidoRepositoryImpl;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -37,6 +39,11 @@ public class ItemService {
         return itemRepository.findAll().stream()
                 .map(itemDTOMapper::toDTO)
                 .collect(Collectors.toSet());
+    }
+
+    public Page<ItemDTO> findAll(Pageable pageable) {
+        return itemRepository.findAll(pageable)
+                .map(itemDTOMapper::toDTO);
     }
 
     public ItemDTO create(ItemDTO itemDTO) {

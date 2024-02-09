@@ -4,13 +4,14 @@ import com.senior.loja.business.dto.ItemDTO;
 import com.senior.loja.business.service.ItemService;
 import com.senior.loja.infra.assembler.ItemModelAssembler;
 import jakarta.validation.Valid;
-import org.springframework.hateoas.CollectionModel;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -34,10 +35,11 @@ public class ItemController {
     }
 
     @GetMapping
-    public ResponseEntity<?> findAll() {
-        Set<ItemDTO> itens = itemService.findAll();
-        CollectionModel<EntityModel<ItemDTO>> collectionModel = itemModelAssembler.toCollectionModel(itens);
-        return ResponseEntity.ok(collectionModel);
+    public ResponseEntity<?> findAll(
+            @PageableDefault(size = 5, page = 0) Pageable pageable
+            ) {
+        Page<ItemDTO> itens = itemService.findAll(pageable);
+        return ResponseEntity.ok(itens);
     }
 
     @PostMapping

@@ -13,12 +13,12 @@ import com.senior.loja.domain.entity.Pedido;
 import com.senior.loja.domain.repository.ItemDoPedidoRepository;
 import com.senior.loja.domain.repository.ItemRepository;
 import com.senior.loja.domain.repository.PedidoRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class PedidoService {
@@ -39,10 +39,9 @@ public class PedidoService {
     }
 
 
-    public Set<PedidoDTO> findAll() {
-        return pedidoRepository.findAll().stream()
-                .map(pedidoDTOMapper::toDTO)
-                .collect(Collectors.toSet());
+    public Page<PedidoDTO> findAll(Pageable pageable) {
+        return pedidoRepository.findAll(pageable)
+                .map(pedidoDTOMapper::toDTO);
     }
 
     public PedidoDTO findById(UUID id) {

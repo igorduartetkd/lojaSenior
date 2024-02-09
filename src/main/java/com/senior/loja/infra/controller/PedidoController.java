@@ -1,18 +1,20 @@
 package com.senior.loja.infra.controller;
 
-import com.senior.loja.business.dto.*;
+import com.senior.loja.business.dto.AbrirFecharPedidoDTO;
+import com.senior.loja.business.dto.AdicionarRemoverItemDTO;
+import com.senior.loja.business.dto.DescontoDTO;
+import com.senior.loja.business.dto.PedidoDTO;
 import com.senior.loja.business.service.PedidoService;
-import com.senior.loja.domain.entity.Pedido;
 import com.senior.loja.infra.assembler.PedidoModelAssembler;
 import jakarta.validation.Valid;
-import org.springframework.hateoas.CollectionModel;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
-import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -36,10 +38,11 @@ public class PedidoController {
     }
 
     @GetMapping
-    public ResponseEntity<?> findAll() {
-        Set<PedidoDTO> pedidos = pedidoService.findAll();
-        CollectionModel<EntityModel<PedidoDTO>> collectionModel = pedidoModelAssembler.toCollectionModel(pedidos);
-        return ResponseEntity.ok(collectionModel);
+    public ResponseEntity<?> findAll(
+            @PageableDefault(size = 5, page = 0) Pageable pageable
+    ) {
+        Page<PedidoDTO> pedidos = pedidoService.findAll(pageable);
+        return ResponseEntity.ok(pedidos);
     }
 
     @PostMapping
