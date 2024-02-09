@@ -7,7 +7,13 @@ Versões:
 - Java 17
 - Spring boot 3.2.2
 - Postgres 16 (mas não deve dar problema com outras versões)
-  - configurar usuario, senha e nome da database que criar no arquivo  src/main/resources/application.yml 
+  - Abrir o arquivo src/main/resources/application.yml
+  - Adicionar seu usuario e senha do postgres
+  - Adicionar uma database existente ou criar uma chamada loja
+
+Executar o projeto:
+- Após ter o ambiente configurado, na pasta raiz executar o comando:
+  - ```mvn spring-boot:run```
 
 ## Endpoints
 ### Pedidos
