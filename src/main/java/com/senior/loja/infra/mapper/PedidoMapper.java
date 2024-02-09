@@ -7,21 +7,24 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class PedidoToDomainMapper implements EntityToDomainMapper<PedidoEntity, Pedido> {
-
-    ItemDoPedidoToDomainMapper itemDoPedidoToDomainMapper;
-
-    public PedidoToDomainMapper(ItemDoPedidoToDomainMapper itemDoPedidoToDomainMapper) {
-        this.itemDoPedidoToDomainMapper = itemDoPedidoToDomainMapper;
-    }
+public class PedidoMapper implements EntityToDomainMapper<PedidoEntity, Pedido>,
+        DomainToEntityMapper<Pedido, PedidoEntity> {
 
     @Override
     public Optional<Pedido> toDomain(PedidoEntity entity) {
         return entity == null ? Optional.empty() : Optional.of(Pedido.builder()
                 .id(entity.getId())
-                .itens(itemDoPedidoToDomainMapper.toDomain(entity.getItens()))
                 .desconto(entity.getDesconto())
                 .situacao(entity.getSituacao())
                 .build());
+    }
+
+    @Override
+    public PedidoEntity toEntity(Pedido domain) {
+        return domain == null ? null : PedidoEntity.builder()
+                .id(domain.getId())
+                .desconto(domain.getDesconto())
+                .situacao(domain.getSituacao())
+                .build();
     }
 }
