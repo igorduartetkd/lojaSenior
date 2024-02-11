@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 public class ItemDoPedidoEntity extends BaseEntity {
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private ItemEntity itemEntity;
 
     @NotNull
