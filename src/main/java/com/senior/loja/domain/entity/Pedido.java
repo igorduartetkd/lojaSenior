@@ -49,7 +49,7 @@ public class Pedido extends BaseDomain {
     }
 
     public BigDecimal obterValorComDesconto() {
-        return itens == null ? null : itens.stream()
+        return itens == null ? BigDecimal.ZERO : itens.stream()
                 .map(itemDoPedido -> itemDoPedido.valorTotalComDesconto(desconto))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
