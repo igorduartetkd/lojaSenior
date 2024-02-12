@@ -4,6 +4,7 @@ import com.senior.loja.domain.entity.Pedido;
 import com.senior.loja.domain.repository.PedidoRepository;
 import com.senior.loja.infra.database.entity.PedidoEntity;
 import com.senior.loja.infra.database.repository.PedidoEntityRepository;
+import com.senior.loja.infra.mapper.PedidoComItensMapper;
 import com.senior.loja.infra.mapper.PedidoMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,11 +19,12 @@ import java.util.UUID;
 public class PedidoRepositoryImpl implements PedidoRepository {
 
     PedidoEntityRepository pedidoEntityRepository;
+    PedidoComItensMapper pedidoComItensMapper;
     PedidoMapper pedidoMapper;
 
-    public PedidoRepositoryImpl(PedidoEntityRepository pedidoEntityRepository,
-                                PedidoMapper pedidoMapper) {
+    public PedidoRepositoryImpl(PedidoEntityRepository pedidoEntityRepository, PedidoComItensMapper pedidoComItensMapper, PedidoMapper pedidoMapper) {
         this.pedidoEntityRepository = pedidoEntityRepository;
+        this.pedidoComItensMapper = pedidoComItensMapper;
         this.pedidoMapper = pedidoMapper;
     }
 
@@ -36,17 +38,17 @@ public class PedidoRepositoryImpl implements PedidoRepository {
     @Override
     public Optional<Pedido> findById(UUID id) {
         Optional<PedidoEntity> pedidoEntity = pedidoEntityRepository.findById(id);
-        return pedidoMapper.toDomainOptional(pedidoEntity);
+        return pedidoComItensMapper.toDomainOptional(pedidoEntity);
     }
 
     public Set<Pedido> findAll() {
         List<PedidoEntity> pedidos = pedidoEntityRepository.findAll();
-        return pedidoMapper.toDomainOptional(pedidos);
+        return pedidoComItensMapper.toDomainOptional(pedidos);
     }
 
     public Page<Pedido> findAll(Pageable pageable) {
         Page<PedidoEntity> pedidos = pedidoEntityRepository.findAll(pageable);
-        return pedidos.map(pedidoMapper::toDomain);
+        return pedidos.map(pedidoComItensMapper::toDomain);
     }
 
 

@@ -18,8 +18,7 @@ import java.util.Set;
 @Getter
 public class PedidoEntity extends BaseEntity {
 
-    @Transient
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private Set<ItemDoPedidoEntity> itens = new HashSet<>();
 
     @Column

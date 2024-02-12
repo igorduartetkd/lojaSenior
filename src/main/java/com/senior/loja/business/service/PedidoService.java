@@ -45,17 +45,9 @@ public class PedidoService {
     }
 
     public PedidoDTO findById(UUID id) {
-        return findPedidoComItensById(id)
+        return pedidoRepository.findById(id)
                 .map(pedidoDTOMapper::toDTO)
                 .orElseThrow(() -> new PedidoNotFoundException(id));
-    }
-
-    private Optional<Pedido> findPedidoComItensById(UUID id) {
-        return pedidoRepository.findById(id)
-                .map(pedido -> {
-                    pedido.setItens(itemDoPedidoRepository.findAllByPedido(pedido));
-                    return pedido;
-                });
     }
 
     public PedidoDTO create(PedidoDTO pedidoDTO) {
@@ -66,7 +58,7 @@ public class PedidoService {
     }
 
     public PedidoDTO aplicarDesconto(DescontoDTO descontoDTO) {
-        Pedido pedido = findPedidoComItensById(descontoDTO.getId())
+        Pedido pedido = pedidoRepository.findById(descontoDTO.getId())
                 .map(pedidoOriginal -> {
                     pedidoOriginal.aplicarDesconto(descontoDTO.getPercentualDeDesconto());
                     pedidoRepository.save(pedidoOriginal);
@@ -82,11 +74,10 @@ public class PedidoService {
         Item item = itemRepository.findById(idItem)
                 .orElseThrow(() -> new ItemNotFoundException(idItem));
 
-        Pedido pedido = findPedidoComItensById(idPedido)
+        Pedido pedido = pedidoRepository.findById(idPedido)
                 .map(pedidoOriginal -> {
                     ItemDoPedido itemDoPedido = pedidoOriginal.adicionarItem(item);
                     itemDoPedidoRepository.save(itemDoPedido);
-                    pedidoRepository.save(pedidoOriginal);
                     return pedidoOriginal;
                 })
                 .orElseThrow(() -> new PedidoNotFoundException(idPedido));
@@ -99,7 +90,7 @@ public class PedidoService {
         Item item = itemRepository.findById(idItem)
                 .orElseThrow(() -> new ItemNotFoundException(idItem));
 
-        Pedido pedido = findPedidoComItensById(idPedido)
+        Pedido pedido = pedidoRepository.findById(idPedido)
                 .map(pedidoOriginal -> {
                     ItemDoPedido itemDoPedido = pedidoOriginal.removerItem(item);
                     if (itemDoPedido.qtdChegouAZero()) {
@@ -107,7 +98,6 @@ public class PedidoService {
                     } else {
                         itemDoPedidoRepository.save(itemDoPedido);
                     }
-                    pedidoRepository.save(pedidoOriginal);
                     return pedidoOriginal;
                 })
                 .orElseThrow(() -> new PedidoNotFoundException(idPedido));
