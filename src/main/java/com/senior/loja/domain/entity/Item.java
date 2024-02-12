@@ -46,6 +46,9 @@ public class Item extends BaseDomain {
     }
 
     private BigDecimal valorDoDesconto(BigDecimal porcentagemDesconto) {
+        if (porcentagemDesconto == null) {
+            return BigDecimal.ZERO;
+        }
         return preco.multiply(porcentagemDesconto).divide(BigDecimal.valueOf(100));
     }
 

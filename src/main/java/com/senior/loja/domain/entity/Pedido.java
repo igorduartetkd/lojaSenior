@@ -27,6 +27,13 @@ public class Pedido extends BaseDomain {
         situacao = Situacao.FECHADO;
     }
 
+    public BigDecimal getDesconto() {
+        if (desconto == null) {
+            return BigDecimal.ZERO;
+        }
+        return desconto;
+    }
+
     public Boolean pedidoAberto() {
         if (situacao == Situacao.ABERTO) {
             return Boolean.TRUE;
