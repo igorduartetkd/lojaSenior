@@ -39,7 +39,7 @@ public class PedidoController {
 
     @GetMapping
     public ResponseEntity<?> findAll(
-            @PageableDefault(size = 5, page = 0) Pageable pageable
+            @PageableDefault(size = 5) Pageable pageable
     ) {
         Page<PedidoDTO> pedidos = pedidoService.findAll(pageable);
         return ResponseEntity.ok(pedidos);
