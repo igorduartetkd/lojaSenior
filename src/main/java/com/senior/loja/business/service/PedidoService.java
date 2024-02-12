@@ -17,7 +17,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -122,5 +121,11 @@ public class PedidoService {
                 })
                 .orElseThrow(() -> new PedidoNotFoundException(abrirFecharPedidoDTO.getId()));
         return pedidoDTOMapper.toDTO(pedido);
+    }
+
+    public void delete(UUID id) {
+        Pedido pedido = pedidoRepository.findById(id)
+                .orElseThrow(() -> new PedidoNotFoundException(id));
+        pedidoRepository.delete(pedido);
     }
 }

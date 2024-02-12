@@ -89,4 +89,10 @@ public class PedidoController {
         EntityModel<PedidoDTO> entityModel = pedidoModelAssembler.toModel(pedido);
         return ResponseEntity.ok(entityModel);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable UUID id) {
+        pedidoService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
