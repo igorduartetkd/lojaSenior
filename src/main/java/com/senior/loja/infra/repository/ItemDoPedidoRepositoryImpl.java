@@ -1,7 +1,6 @@
 package com.senior.loja.infra.repository;
 
 import com.senior.loja.domain.entity.ItemDoPedido;
-import com.senior.loja.domain.entity.Pedido;
 import com.senior.loja.domain.repository.ItemDoPedidoRepository;
 import com.senior.loja.infra.database.entity.ItemDoPedidoEntity;
 import com.senior.loja.infra.database.repository.ItemDoPedidoEntityRepository;
@@ -53,17 +52,6 @@ public class ItemDoPedidoRepositoryImpl implements ItemDoPedidoRepository {
     @Override
     public Boolean existsByItemId(UUID itemId) {
         return itemDoPedidoEntityRepository.existsByItemEntity_Id(itemId);
-    }
-
-    @Override
-    public Set<ItemDoPedido> findAllByPedido(Pedido pedido) {
-        List<ItemDoPedidoEntity> itensDoPedido = itemDoPedidoEntityRepository.findAllByPedidoId(pedido.getId());
-        return itemDoPedidoMapper.toDomainOptional(itensDoPedido);
-    }
-
-    public Set<ItemDoPedido> saveAll(Set<ItemDoPedido> itens) {
-        List<ItemDoPedidoEntity> itensSalvos = itemDoPedidoEntityRepository.saveAll(itemDoPedidoMapper.toEntity(itens));
-        return itemDoPedidoMapper.toDomainOptional(itensSalvos);
     }
 
 }
